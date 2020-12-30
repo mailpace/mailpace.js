@@ -22,7 +22,10 @@
     "transpiled",
     "typedoc",
     "untracked",
-    "ohmysmtp"
+    "ohmysmtp",
+    "replyto",
+    "htmlbody",
+    "textbody"
   ],
   "flagWords": [],
   "ignorePaths": [
