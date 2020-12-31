@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { DefaultResponse } from './models/DefaultResponse';
+import { ErrorResponse } from './models/Responses';
 import * as Errors from './models/Errors';
 
 /**
@@ -19,7 +19,7 @@ export class ErrorHandler {
 
     if (response !== undefined) {
       return this.buildErrorForResponse(response, error.message);
-    } else if (error.message !== undefined) {
+    } else if (error !== undefined) {
       return this.buildGeneralError(error.message);
     } else {
       return this.buildGeneralError(
@@ -49,15 +49,15 @@ export class ErrorHandler {
     response: AxiosResponse,
     errorMessage: string
   ): Errors.OmsError {
-    const data: DefaultResponse = response.data;
-    const errorCode = this.retrieveDefaultOrValue<number>(0, data.ErrorCode);
+    const data: ErrorResponse = response.data;
     const status = this.retrieveDefaultOrValue<number>(0, response.status);
+    // how to handle the two different errors?
     const message = this.retrieveDefaultOrValue<string>(
       errorMessage,
-      data.Message
+      data.error || JSON.stringify(data.errors)
     );
 
-    return this.buildRequestErrorByStatus(message, errorCode, status);
+    return this.buildRequestErrorByStatus(message, status);
   }
 
   private retrieveDefaultOrValue<T>(defaultValue: T, data: T): T {
@@ -73,47 +73,35 @@ export class ErrorHandler {
    */
   private buildRequestErrorByStatus(
     errorMessage: string,
-    errorCode: number,
     errorStatusCode: number
   ): Errors.HttpError {
     switch (errorStatusCode) {
+      case 400:
+        return new Errors.OmsError(errorMessage, errorStatusCode);
+
       case 401:
-        return new Errors.InvalidAPIKeyError(
-          errorMessage,
-          errorCode,
-          errorStatusCode
-        );
+        return new Errors.InvalidAPIKeyError(errorMessage, errorStatusCode);
+
+      case 403:
+        return new Errors.UnauthorizedDomain(errorMessage, errorStatusCode);
 
       case 404:
-        return new Errors.OmsError(errorMessage, errorCode, errorStatusCode);
+        return new Errors.OmsError(errorMessage, errorStatusCode);
 
-      case 422:
-        return new Errors.ApiInputError(
-          errorMessage,
-          errorCode,
-          errorStatusCode
-        );
+      case 406:
+        return new Errors.ApiInputError(errorMessage, errorStatusCode);
 
       case 500:
-        return new Errors.InternalServerError(
-          errorMessage,
-          errorCode,
-          errorStatusCode
-        );
+        return new Errors.InternalServerError(errorMessage, errorStatusCode);
 
       case 503:
-        return new Errors.ServiceUnavailablerError(
+        return new Errors.ServiceUnavailableError(
           errorMessage,
-          errorCode,
           errorStatusCode
         );
 
       default:
-        return new Errors.UnknownError(
-          errorMessage,
-          errorCode,
-          errorStatusCode
-        );
+        return new Errors.UnknownError(errorMessage, errorStatusCode);
     }
   }
 }

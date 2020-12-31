@@ -2,7 +2,8 @@ import BaseClient from './BaseClient';
 
 import { Callback } from './models/Callback';
 import { Options } from './models/Options';
-import { Message, MessageSendingResponse } from './models/Message';
+import { Message } from './models/Message';
+import { SendResponse } from './models/Responses';
 
 /**
  * Client class that can be used to interact with an OhMySMTP Domain
@@ -26,9 +27,9 @@ export default class DomainClient extends BaseClient {
    */
   public sendEmail(
     email: Message,
-    callback?: Callback<MessageSendingResponse>
-  ): Promise<MessageSendingResponse> {
-    return this.processRequestWithBody<MessageSendingResponse>(
+    callback?: Callback<SendResponse>
+  ): Promise<SendResponse> {
+    return this.processRequestWithBody<SendResponse>(
       Options.HttpMethod.POST,
       '/send',
       email,

@@ -1,5 +1,3 @@
-import { DefaultResponse } from './DefaultResponse';
-
 export class Message {
   public from: string;
   public to?: string;
@@ -28,9 +26,4 @@ export class Message {
     this.htmlbody = htmlbody;
     this.textbody = textbody;
   }
-}
-
-export interface MessageSendingResponse extends DefaultResponse {
-  id?: string;
-  status?: string;
 }

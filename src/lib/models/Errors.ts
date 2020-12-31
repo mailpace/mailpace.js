@@ -2,13 +2,11 @@
  * Standard Oms error on which all sub-errors are based.
  */
 export class OmsError extends Error {
-  public code: number;
   public statusCode: number;
 
-  constructor(message: string, code: number = 0, statusCode: number = 0) {
+  constructor(message: string, statusCode: number = 0) {
     super(message);
     this.statusCode = statusCode;
-    this.code = code;
 
     // this is mandatory due:
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
@@ -23,48 +21,56 @@ export class OmsError extends Error {
 }
 
 export class HttpError extends OmsError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
     Object.setPrototypeOf(this, HttpError.prototype);
     this.setUpStackTrace();
   }
 }
 
 export class InvalidAPIKeyError extends HttpError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
     Object.setPrototypeOf(this, InvalidAPIKeyError.prototype);
     this.setUpStackTrace();
   }
 }
 
+export class UnauthorizedDomain extends HttpError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+    Object.setPrototypeOf(this, UnauthorizedDomain.prototype);
+    this.setUpStackTrace();
+  }
+}
+
 export class ApiInputError extends HttpError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
     Object.setPrototypeOf(this, ApiInputError.prototype);
     this.setUpStackTrace();
   }
 }
 
 export class InternalServerError extends HttpError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
     Object.setPrototypeOf(this, InternalServerError.prototype);
     this.setUpStackTrace();
   }
 }
 
-export class ServiceUnavailablerError extends HttpError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
-    Object.setPrototypeOf(this, ServiceUnavailablerError.prototype);
+export class ServiceUnavailableError extends HttpError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+    Object.setPrototypeOf(this, ServiceUnavailableError.prototype);
     this.setUpStackTrace();
   }
 }
 
 export class UnknownError extends HttpError {
-  constructor(message: string, code: number, statusCode: number) {
-    super(message, code, statusCode);
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
     Object.setPrototypeOf(this, UnknownError.prototype);
     this.setUpStackTrace();
   }

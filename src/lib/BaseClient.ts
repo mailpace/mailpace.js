@@ -4,9 +4,8 @@ import { ErrorHandler } from './ErrorHandler';
 import { Callback } from './models/Callback';
 import { Options } from './models/Options';
 
-const packageJson = require('../../package.json');
-const CLIENT_VERSION = packageJson.version;
-const API_VERSION = 'v1';
+const CLIENT_VERSION = '0.0.1'; // TODO: use library version in package.json
+const API_VERSION = 'v1'; // TODO: MAKE THIS A CONFIG OPTION?
 
 /**
  * Base client class from which client classes can be implemented
@@ -77,20 +76,6 @@ export default abstract class BaseClient {
     callback?: Callback<T>
   ): Promise<T> {
     return this.processRequest(method, path, {}, body, callback);
-  }
-
-  /**
-   * Process http request without sending body - data.
-   *
-   * @see processRequest for more details.
-   */
-  protected processRequestWithoutBody<T>(
-    method: Options.HttpMethod,
-    path: string,
-    queryParameters: object = {},
-    callback?: Callback<T>
-  ): Promise<T> {
-    return this.processRequest(method, path, queryParameters, null, callback);
   }
 
   /**

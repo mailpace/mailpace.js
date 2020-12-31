@@ -1,1 +1,2 @@
-export * from './lib/DomainClient';
+import DomainClient from './lib/DomainClient';
+export { DomainClient as DomainClient };
