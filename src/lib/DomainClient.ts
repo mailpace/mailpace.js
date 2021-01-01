@@ -1,28 +1,28 @@
 import BaseClient from './BaseClient';
-import { Callback } from './models/Callback';
 import { Message } from './models/Message';
 import { Options } from './models/Options';
-import { SendResponse } from './models/Responses';
+import { Callback } from './types/Callback';
+import { SendResponse } from './types/Responses';
 
 /**
  * Client class that can be used to interact with an OhMySMTP Domain
  */
 export default class DomainClient extends BaseClient {
   /**
-   * Create a client.
+   * Create a client for sending emails from a domain
    *
-   * @param serverToken - The token for the server that you wish to interact with.
-   * @param configOptions - Options to customize the behavior of the this client.
+   * @param domainToken - The API token for the domain
+   * @param configOptions - Configuration options for accessing the API
    */
-  constructor(serverToken: string, configOptions?: Options.Configuration) {
-    super(serverToken, Options.DefaultHeaderNames.SERVER_TOKEN, configOptions);
+  constructor(domainToken: string, configOptions?: Options.Configuration) {
+    super(domainToken, Options.DefaultHeaderNames.SERVER_TOKEN, configOptions);
   }
 
-  /** Send a single email message.
+  /** Send a single email message through the API
    *
-   * @param send - Email message to send.
-   * @param callback - If the callback is provided, it will be passed to the resulting promise as a continuation.
-   * @returns A promise that will complete when the API responds (or an error occurs).
+   * @param send - Email to send
+   * @param callback - A callback that if provided will be called after sending the email is complete
+   * @returns A promise that will resolve when the API responds (or an error occurs)
    */
   public sendEmail(
     email: Message,

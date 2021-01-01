@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 
 import * as Errors from './models/Errors';
-import { ErrorResponse } from './models/Responses';
+import { ErrorResponse } from './types/Responses';
 
 /**
  * Handles three different error types:
@@ -11,7 +11,7 @@ import { ErrorResponse } from './models/Responses';
  */
 export class ErrorHandler {
   /**
-   * Error Handler
+   * Handle generic and Axios errors
    *
    * @param error - Axios error
    *
@@ -21,45 +21,30 @@ export class ErrorHandler {
     const response: AxiosResponse | undefined = error.response;
 
     if (response !== undefined) {
-      return this.buildErrorForResponse(response, error.message);
-    } else if (error !== undefined) {
-      return this.buildGeneralError(error.message);
+      return this.buildAxiosError(response, error.message);
     } else {
-      return this.buildGeneralError(
-        JSON.stringify(error, Object.getOwnPropertyNames(error))
-      );
+      return new Errors.OmsError(error.message);
     }
   }
 
   /**
-   * Cover standard errors
-   *
-   * @param errorMessage - error message that needs to be identified and transformed to proper OMS error.
-   *
-   * @returns properly formatted Oms error.
-   */
-  public buildGeneralError(errorMessage: string): Errors.OmsError {
-    return new Errors.OmsError(errorMessage);
-  }
-
-  /**
-   * Covers known errors
+   * Prepare the axios based error
    *
    * @param {AxiosResponse} response - Error from Axios library
    * @return {OmsError} - cleaned up error
    */
-  private buildErrorForResponse(
+  private buildAxiosError(
     response: AxiosResponse,
     errorMessage: string
   ): Errors.OmsError {
-    const data: ErrorResponse = response.data;
+    const data: ErrorResponse = response.data || {};
     const status = this.retrieveDefaultOrValue<number>(0, response.status);
     const message = this.retrieveDefaultOrValue<string>(
       errorMessage,
       data.error || JSON.stringify(data.errors)
     );
 
-    return this.buildRequestErrorByStatus(message, status);
+    return this.mapErrorToStatus(message, status);
   }
 
   private retrieveDefaultOrValue<T>(defaultValue: T, data: T): T {
@@ -67,13 +52,13 @@ export class ErrorHandler {
   }
 
   /**
-   * Clean up the error
+   * Map the error based on status code to the correct error type
    *
    * @param error - Axios error
    *
    * @returns correct error type based on the status code
    */
-  private buildRequestErrorByStatus(
+  private mapErrorToStatus(
     errorMessage: string,
     errorStatusCode: number
   ): Errors.HttpError {
@@ -82,16 +67,13 @@ export class ErrorHandler {
         return new Errors.OmsError(errorMessage, errorStatusCode);
 
       case 401:
-        return new Errors.InvalidAPIKeyError(errorMessage, errorStatusCode);
+        return new Errors.InvalidAPIKey(errorMessage, errorStatusCode);
 
       case 403:
         return new Errors.UnauthorizedDomain(errorMessage, errorStatusCode);
 
-      case 404:
-        return new Errors.OmsError(errorMessage, errorStatusCode);
-
       case 406:
-        return new Errors.ApiInputError(errorMessage, errorStatusCode);
+        return new Errors.InvalidRequest(errorMessage, errorStatusCode);
 
       case 500:
         return new Errors.InternalServerError(errorMessage, errorStatusCode);

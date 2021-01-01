@@ -28,10 +28,10 @@ export class HttpError extends OmsError {
   }
 }
 
-export class InvalidAPIKeyError extends HttpError {
+export class InvalidAPIKey extends HttpError {
   constructor(message: string, statusCode: number) {
     super(message, statusCode);
-    Object.setPrototypeOf(this, InvalidAPIKeyError.prototype);
+    Object.setPrototypeOf(this, InvalidAPIKey.prototype);
     this.setUpStackTrace();
   }
 }
@@ -44,10 +44,10 @@ export class UnauthorizedDomain extends HttpError {
   }
 }
 
-export class ApiInputError extends HttpError {
+export class InvalidRequest extends HttpError {
   constructor(message: string, statusCode: number) {
     super(message, statusCode);
-    Object.setPrototypeOf(this, ApiInputError.prototype);
+    Object.setPrototypeOf(this, InvalidRequest.prototype);
     this.setUpStackTrace();
   }
 }

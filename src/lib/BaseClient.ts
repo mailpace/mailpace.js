@@ -1,11 +1,11 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { ErrorHandler } from './ErrorHandler';
-import { Callback } from './models/Callback';
 import { Options } from './models/Options';
+import { Callback } from './types/Callback';
 
 const CLIENT_VERSION = '0.0.1'; // TODO: use library version in package.json
-const API_VERSION = 'v1'; // TODO: make this a config option
+const API_VERSION = 'v1'; // TODO: make this a client option
 
 /**
  * Base client
@@ -15,7 +15,6 @@ export default abstract class BaseClient {
    * Default options
    */
   public static readonly DefaultOptions: Options.Configuration = {
-    useHttps: true,
     requestHost: `app.ohmysmtp.com/api/${API_VERSION}/`,
     timeout: 60,
   };
@@ -23,7 +22,7 @@ export default abstract class BaseClient {
   public readonly clientVersion: string;
   public readonly httpClient: AxiosInstance;
   protected readonly errorHandler: ErrorHandler;
-  private Options: Options.Configuration;
+  private readonly Options: Options.Configuration;
   private readonly authHeader: string;
   private readonly token: string;
 
@@ -36,14 +35,8 @@ export default abstract class BaseClient {
     this.token = token.trim();
     this.authHeader = authHeader;
     this.Options = { ...BaseClient.DefaultOptions, ...configOptions };
-    this.httpClient = this.buildDefaultHttpClient();
+    this.httpClient = this.buildHttpClient();
     this.errorHandler = new ErrorHandler();
-    this.verifyToken(token);
-  }
-
-  public setOptions(configOptions: Options.Configuration): void {
-    this.Options = configOptions;
-    this.buildDefaultHttpClient();
   }
 
   public getOptions(): Options.Configuration {
@@ -53,7 +46,7 @@ export default abstract class BaseClient {
   /**
    * Prepare the default HTTP Request Headers
    */
-  public getComposedHttpRequestHeaders(): object {
+  public prepareHeaders(): object {
     return {
       [this.authHeader]: this.token,
       Accept: 'application/json',
@@ -105,7 +98,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * Process HTTP request.
+   * Process HTTP request
    *
    * @param method - Which type of http request will be executed.
    * @param path - API URL endpoint.
@@ -145,7 +138,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * Process http request.
+   * Send request
    *
    * @param method - Which type of http request will be executed.
    * @param path - API URL endpoint.
@@ -162,20 +155,20 @@ export default abstract class BaseClient {
       method,
       url: path,
       data: body,
-      headers: this.getComposedHttpRequestHeaders(),
+      headers: this.prepareHeaders(),
       params: queryParameters,
     });
   }
 
   /**
-   * Create http client instance with default settings.
+   * Create http client for making requests
    *
    * @return {AxiosInstance}
    */
-  private buildDefaultHttpClient(): AxiosInstance {
+  private buildHttpClient(): AxiosInstance {
     const httpClient = axios.create({
-      baseURL: this.getBaseHttpRequestURL(),
-      timeout: this.getRequestTimeoutInSeconds(),
+      baseURL: `https://${this.Options.requestHost}`,
+      timeout: this.Options.timeout * 1000,
       responseType: 'json',
       maxContentLength: Infinity,
       validateStatus(status) {
@@ -185,27 +178,5 @@ export default abstract class BaseClient {
 
     httpClient.interceptors.response.use((response) => response.data);
     return httpClient;
-  }
-
-  private getRequestTimeoutInSeconds(): number {
-    return (this.Options.timeout || 60) * 1000;
-  }
-
-  private getBaseHttpRequestURL(): string {
-    const scheme = this.Options.useHttps ? 'https' : 'http';
-    return `${scheme}://${this.Options.requestHost}`;
-  }
-
-  /**
-   * Token can't be empty.
-   *
-   * @param {string} token - HTTP request token
-   */
-  private verifyToken(token: string): void {
-    if (!token || token.trim() === '') {
-      throw this.errorHandler.buildGeneralError(
-        'A valid API token must be provided.'
-      );
-    }
   }
 }

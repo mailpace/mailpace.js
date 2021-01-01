@@ -5,10 +5,11 @@ import DomainClient from './DomainClient';
 const token = 'token';
 const client = new DomainClient(token);
 const defaultClientOptions = {
-  useHttps: true,
   requestHost: 'app.ohmysmtp.com/api/v1/',
   timeout: 60,
 };
+const otherClientOptions = { requestHost: 'another.com', timeout: 600 };
+
 const defaultRequestHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -22,5 +23,10 @@ test('can initialize the domain client with default values', (t) => {
 });
 
 test('token is set', (t) => {
-  t.deepEqual(client.getComposedHttpRequestHeaders(), defaultRequestHeaders);
+  t.deepEqual(client.prepareHeaders(), defaultRequestHeaders);
+});
+
+test('supports passing in different options', (t) => {
+  const updatedClient = new DomainClient(token, otherClientOptions);
+  t.deepEqual(updatedClient.getOptions(), otherClientOptions);
 });
