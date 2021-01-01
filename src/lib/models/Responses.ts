@@ -1,9 +1,9 @@
-export interface SendResponse {
-  id: number;
-  status: string;
-}
+export type SendResponse = {
+  readonly id: number;
+  readonly status: string;
+};
 
-export interface ErrorResponse {
-  error?: string;
-  errors?: object;
-}
+export type ErrorResponse = {
+  readonly error?: string;
+  readonly errors?: object;
+};

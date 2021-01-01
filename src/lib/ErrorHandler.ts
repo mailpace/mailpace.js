@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { ErrorResponse } from './models/Responses';
+
 import * as Errors from './models/Errors';
+import { ErrorResponse } from './models/Responses';
 
 /**
  * Handles three different error types:

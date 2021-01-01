@@ -5,9 +5,10 @@ import MockAdapter from 'axios-mock-adapter';
 
 // Mock the send endpoint
 const mock = new MockAdapter(axios);
-mock.onPost('/send').reply(200, {});
+const successResponse = { id: 0, status: 'pending' };
+mock.onPost('/send').reply(200, successResponse);
 
-const ohmysmtp = require('./index');
+import * as ohmysmtp from './index';
 const client = new ohmysmtp.DomainClient('token');
 
 test('importing and calling sendEmail triggers /send endpoint', async (t) => {
@@ -16,7 +17,7 @@ test('importing and calling sendEmail triggers /send endpoint', async (t) => {
     to: 'test@test.com',
     subject: 'test',
   });
-  t.deepEqual(response, {});
+  t.deepEqual(response, successResponse);
 });
 
 mock.restore();

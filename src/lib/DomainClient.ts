@@ -1,8 +1,7 @@
 import BaseClient from './BaseClient';
-
 import { Callback } from './models/Callback';
-import { Options } from './models/Options';
 import { Message } from './models/Message';
+import { Options } from './models/Options';
 import { SendResponse } from './models/Responses';
 
 /**

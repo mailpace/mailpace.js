@@ -14,15 +14,15 @@ export default abstract class BaseClient {
   /**
    * Default options
    */
-  public static DefaultOptions: Options.Configuration = {
+  public static readonly DefaultOptions: Options.Configuration = {
     useHttps: true,
     requestHost: `app.ohmysmtp.com/api/${API_VERSION}/`,
     timeout: 60,
   };
 
-  public clientVersion: string;
+  public readonly clientVersion: string;
   public readonly httpClient: AxiosInstance;
-  protected errorHandler: ErrorHandler;
+  protected readonly errorHandler: ErrorHandler;
   private Options: Options.Configuration;
   private readonly authHeader: string;
   private readonly token: string;

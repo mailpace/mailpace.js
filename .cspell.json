@@ -25,7 +25,8 @@
     "ohmysmtp",
     "replyto",
     "htmlbody",
-    "textbody"
+    "textbody",
+    "readonly"
   ],
   "flagWords": [],
   "ignorePaths": [

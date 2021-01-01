@@ -2,9 +2,9 @@
  * Standard Oms error on which all sub-errors are based.
  */
 export class OmsError extends Error {
-  public statusCode: number;
+  public readonly statusCode: number;
 
-  constructor(message: string, statusCode: number = 0) {
+  constructor(message: string, statusCode = 0) {
     super(message);
     this.statusCode = statusCode;
 
