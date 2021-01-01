@@ -63,7 +63,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * Prepare the request and send to processrequest
+   * Prepare the request and send on
    *
    * @see processRequest for more details.
    */
