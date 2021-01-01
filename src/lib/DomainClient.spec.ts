@@ -5,7 +5,8 @@ import DomainClient from './DomainClient';
 const token = 'token';
 const client = new DomainClient(token);
 const defaultClientOptions = {
-  requestHost: 'ohmysmtp.com/api/v1/',
+  useHttps: true,
+  requestHost: 'app.ohmysmtp.com/api/v1/',
   timeout: 60,
 };
 const defaultRequestHeaders = {
@@ -22,15 +23,4 @@ test('can initialize the domain client with default values', (t) => {
 
 test('token is set', (t) => {
   t.deepEqual(client.getComposedHttpRequestHeaders(), defaultRequestHeaders);
-});
-
-test('send real email', (t) => {
-  client.sendEmail({
-    from: 'test@test.com',
-    to: 'test@test.com',
-    subject: 'test',
-  });
-  t.deepEqual(client.getComposedHttpRequestHeaders(), defaultRequestHeaders);
-
-  // Async test here?
 });

@@ -49,9 +49,11 @@ export class ErrorHandler {
     response: AxiosResponse,
     errorMessage: string
   ): Errors.OmsError {
+    console.log(response);
+    console.log(errorMessage);
+
     const data: ErrorResponse = response.data;
     const status = this.retrieveDefaultOrValue<number>(0, response.status);
-    // how to handle the two different errors?
     const message = this.retrieveDefaultOrValue<string>(
       errorMessage,
       data.error || JSON.stringify(data.errors)

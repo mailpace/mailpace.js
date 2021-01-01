@@ -18,7 +18,8 @@ export default abstract class BaseClient {
    * Any values provided to a Client constructor will override default options.
    */
   public static DefaultOptions: Options.Configuration = {
-    requestHost: `ohmysmtp.com/api/${API_VERSION}/`,
+    useHttps: true,
+    requestHost: `app.ohmysmtp.com/api/${API_VERSION}/`,
     timeout: 60,
   };
 
@@ -194,7 +195,8 @@ export default abstract class BaseClient {
   }
 
   private getBaseHttpRequestURL(): string {
-    return `https://${this.Options.requestHost}`;
+    const scheme = this.Options.useHttps ? 'https' : 'http';
+    return `${scheme}://${this.Options.requestHost}`;
   }
 
   /**
