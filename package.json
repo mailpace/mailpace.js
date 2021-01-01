@@ -5,7 +5,7 @@
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/pauljohncleary/ohmysmtp.js",
+  "repository": "https://github.com/ohmysmtp/ohmysmtp.js",
   "license": "MIT",
   "keywords": [],
   "scripts": {
