@@ -31,7 +31,7 @@
     "@typescript-eslint/ban-types": "off",
     "functional/no-throw-statement": "off",
     "functional/no-return-void": "off",
-    "typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "eslint-comments/disable-enable-pair": [
       "error",
