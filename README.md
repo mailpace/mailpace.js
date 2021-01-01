@@ -1,5 +1,7 @@
 # OhMySMTP Node.js Library
 
+[![<ORG_NAME>](https://circleci.com/gh/ohmysmtp/ohmysmtp.js.svg?style=svg)](https://app.circleci.com/pipelines/github/ohmysmtp/ohmysmtp.js)
+
 This is the official Node.js library for the https://ohmysmtp.com transactional email API
 
 ## Quick Start

@@ -3,16 +3,18 @@ import { ErrorResponse } from './models/Responses';
 import * as Errors from './models/Errors';
 
 /**
- * Handles general errors and all client request errors.
- * Client response errors are classified so that proper response error is generated.
+ * Handles three different error types:
+ *  - Unknown
+ *  - Single error (from API)
+ *  - Array of errors (from API)
  */
 export class ErrorHandler {
   /**
-   * Process callback function for HTTP request.
+   * Error Handler
    *
-   * @param error - request error that needs to be transformed to proper Oms error.
+   * @param error - Axios error
    *
-   * @return {OmsError} - formatted Oms error
+   * @return {OmsError} - Oms error
    */
   public buildRequestError(error: AxiosError): Errors.OmsError {
     const response: AxiosResponse | undefined = error.response;
@@ -29,7 +31,7 @@ export class ErrorHandler {
   }
 
   /**
-   * Build general OMS error.
+   * Cover standard errors
    *
    * @param errorMessage - error message that needs to be identified and transformed to proper OMS error.
    *
@@ -40,18 +42,15 @@ export class ErrorHandler {
   }
 
   /**
-   * Build Oms error based on response from http client.
+   * Covers known errors
    *
-   * @param {AxiosResponse} response - request response used to transform to Oms error.
-   * @return {OmsError} - formatted Oms error
+   * @param {AxiosResponse} response - Error from Axios library
+   * @return {OmsError} - cleaned up error
    */
   private buildErrorForResponse(
     response: AxiosResponse,
     errorMessage: string
   ): Errors.OmsError {
-    console.log(response);
-    console.log(errorMessage);
-
     const data: ErrorResponse = response.data;
     const status = this.retrieveDefaultOrValue<number>(0, response.status);
     const message = this.retrieveDefaultOrValue<string>(
@@ -67,11 +66,11 @@ export class ErrorHandler {
   }
 
   /**
-   * Build Oms error based on HTTP request status.
+   * Clean up the error
    *
-   * @param error - http request library error, that will be transformed to Oms error.
+   * @param error - Axios error
    *
-   * @returns properly formatted Oms error.
+   * @returns correct error type based on the status code
    */
   private buildRequestErrorByStatus(
     errorMessage: string,

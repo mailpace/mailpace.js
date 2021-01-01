@@ -5,17 +5,14 @@ import { Callback } from './models/Callback';
 import { Options } from './models/Options';
 
 const CLIENT_VERSION = '0.0.1'; // TODO: use library version in package.json
-const API_VERSION = 'v1'; // TODO: MAKE THIS A CONFIG OPTION?
+const API_VERSION = 'v1'; // TODO: make this a config option
 
 /**
- * Base client class from which client classes can be implemented
- * This class is NOT intended to be instantiated directly.
+ * Base client
  */
 export default abstract class BaseClient {
   /**
-   * Client connection configuration options.
-   * You may modify these values and new clients will use them.
-   * Any values provided to a Client constructor will override default options.
+   * Default options
    */
   public static DefaultOptions: Options.Configuration = {
     useHttps: true,
@@ -54,7 +51,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * JSON object with default headers sent by HTTP request.
+   * Prepare the default HTTP Request Headers
    */
   public getComposedHttpRequestHeaders(): object {
     return {
@@ -66,7 +63,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * Process http request with sending body - data.
+   * Prepare the request and send to processrequest
    *
    * @see processRequest for more details.
    */
@@ -80,7 +77,7 @@ export default abstract class BaseClient {
   }
 
   /**
-   * Process request for OMS Options.
+   * Send HTTP request via Axios
    *
    * @param method - see processHttpRequest for details
    * @param path - see processHttpRequest for details
