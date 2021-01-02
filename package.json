@@ -1,6 +1,6 @@
 {
-  "name": "ohmysmtp.js",
-  "version": "0.0.1",
+  "name": "@ohmysmtp/ohmysmtp.js",
+  "version": "0.0.2",
   "description": "The official Node.js library for the https://ohmysmtp.com API",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -42,16 +42,18 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@bitauth/libauth": "^1.17.1"
+    "axios": "^0.21.1",
+    "typescript": "^4.0.2",
+    "ts-node": "^9.0.0",
+    "@types/node": "^14.14.16"
   },
   "devDependencies": {
+    "@bitauth/libauth": "^1.17.1",
     "@ava/typescript": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@types/node": "^14.14.16",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",
-    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.19.0",
     "codecov": "^3.5.0",
     "cspell": "^4.1.0",
@@ -67,9 +69,7 @@
     "open-cli": "^6.0.1",
     "prettier": "^2.1.1",
     "standard-version": "^9.0.0",
-    "ts-node": "^9.0.0",
-    "typedoc": "^0.19.0",
-    "typescript": "^4.0.2"
+    "typedoc": "^0.19.0"
   },
   "files": [
     "build/main",
