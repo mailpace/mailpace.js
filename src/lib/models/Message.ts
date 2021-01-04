@@ -1,18 +1,18 @@
 export class Message {
   public readonly from: string;
-  public readonly to?: string;
+  public readonly to: string;
   public readonly cc?: string;
   public readonly bcc?: string;
-  public readonly subject: string;
+  public readonly subject?: string;
   public readonly replyto?: string;
   public readonly htmlbody?: string;
   public readonly textbody?: string;
   constructor(
     from: string,
-    subject: string,
+    to: string,
+    subject?: string,
     htmlbody?: string,
     textbody?: string,
-    to?: string,
     cc?: string,
     bcc?: string,
     replyto?: string
