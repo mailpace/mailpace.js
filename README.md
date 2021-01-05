@@ -2,6 +2,8 @@
 
 [![<ORG_NAME>](https://circleci.com/gh/ohmysmtp/ohmysmtp.js.svg?style=svg)](https://app.circleci.com/pipelines/github/ohmysmtp/ohmysmtp.js)
 [![codecov](https://codecov.io/gh/ohmysmtp/ohmysmtp.js/branch/master/graph/badge.svg?token=QDLVU2JGyD)](https://codecov.io/gh/ohmysmtp/ohmysmtp.js)
+[![npm version](https://badge.fury.io/js/%40ohmysmtp%2Fohmysmtp.js.svg)](https://badge.fury.io/js/%40ohmysmtp%2Fohmysmtp.js)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 This is the official Node.js library for the https://ohmysmtp.com transactional email API
 
