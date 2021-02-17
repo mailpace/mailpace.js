@@ -94,3 +94,19 @@ test.serial('handles other errors', async (t) => {
   const error = await t.throwsAsync(() => client.sendEmail(exampleEmail));
   t.is(error.message, 'Request failed with status code 418');
 });
+
+test.serial('can handle attachments', async (t) => {
+  const exampleAttachment = {
+    name: 'hello.pdf',
+    cid: 'hello',
+    content: 'test',
+    content_type: 'test/test',
+  };
+  const emailWithAttachments = Object.assign(
+    { attachments: [exampleAttachment, exampleAttachment] },
+    exampleEmail
+  );
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithAttachments);
+  t.deepEqual(response, successResponse);
+});

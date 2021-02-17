@@ -4,7 +4,7 @@ import { ErrorHandler } from './ErrorHandler';
 import { Options } from './models/Options';
 import { Callback } from './types/Callback';
 
-const CLIENT_VERSION = '0.0.1'; // TODO: use library version in package.json
+const CLIENT_VERSION = '0.0.4'; // TODO: use library version in package.json
 const API_VERSION = 'v1'; // TODO: make this a client option
 
 /**
