@@ -8,5 +8,5 @@ export type Message = {
   cc?: string;
   bcc?: string;
   replyto?: string;
-  attachments?: Array<Attachment>;
+  attachments?: ReadonlyArray<Attachment>;
 };
