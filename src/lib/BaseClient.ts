@@ -4,7 +4,7 @@ import { ErrorHandler } from './ErrorHandler';
 import { Options } from './models/Options';
 import { Callback } from './types/Callback';
 
-const CLIENT_VERSION = '0.0.7'; // TODO: use library version in package.json
+const CLIENT_VERSION = '0.0.8'; // TODO: use library version in package.json
 const API_VERSION = 'v1'; // TODO: make this a client option
 
 /**
@@ -171,7 +171,7 @@ export default abstract class BaseClient {
       timeout: this.Options.timeout * 1000,
       responseType: 'json',
       maxContentLength: Infinity,
-      maxBodyLength: 50000,
+      maxBodyLength: 30 * 1024 * 1024,
       validateStatus(status) {
         return status >= 200 && status < 300;
       },
