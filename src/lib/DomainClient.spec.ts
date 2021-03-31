@@ -14,7 +14,7 @@ const defaultRequestHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
   'OhMySMTP-Server-Token': token,
-  'User-Agent': 'ohmysmtp.js - 0.0.9',
+  'User-Agent': 'ohmysmtp.js - 0.0.10',
 };
 
 test('can initialize the domain client with default values', (t) => {
