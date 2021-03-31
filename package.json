@@ -1,6 +1,6 @@
 {
   "name": "@ohmysmtp/ohmysmtp.js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "The official Node.js library for the https://ohmysmtp.com API",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",

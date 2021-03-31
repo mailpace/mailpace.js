@@ -110,3 +110,24 @@ test.serial('can handle attachments', async (t) => {
   const response = await client.sendEmail(emailWithAttachments);
   t.deepEqual(response, successResponse);
 });
+
+test.serial('can handle single tags', async (t) => {
+  const emailWithTags = Object.assign({ tags: 'a single tag' }, exampleEmail);
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithTags);
+  const request = JSON.parse(mock.history.post[0].data);
+  t.deepEqual(response, successResponse);
+  t.deepEqual(request.tags, 'a single tag');
+});
+
+test.serial('can handle array of tags', async (t) => {
+  const emailWithTags = Object.assign(
+    { tags: ['array', 'of', 'tags'] },
+    exampleEmail
+  );
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithTags);
+  const request = JSON.parse(mock.history.post[0].data);
+  t.deepEqual(response, successResponse);
+  t.deepEqual(request.tags, ['array', 'of', 'tags']);
+});

@@ -9,4 +9,5 @@ export type Message = {
   bcc?: string;
   replyto?: string;
   attachments?: ReadonlyArray<Attachment>;
+  tags?: string | Array<String>;
 };
