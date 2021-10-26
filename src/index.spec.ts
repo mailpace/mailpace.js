@@ -131,3 +131,16 @@ test.serial('can handle array of tags', async (t) => {
   t.deepEqual(response, successResponse);
   t.deepEqual(request.tags, ['array', 'of', 'tags']);
 });
+
+test.serial('can handle list-unsubscribe headers', async (t) => {
+  const emailWithListUnsubscribe = Object.assign(
+    {
+      list_unsubscribe:
+        '<http://www.host.com/list.cgi?cmd=unsub&lst=list>, <mailto:list-request@host.com?subject=unsubscribe>',
+    },
+    exampleEmail
+  );
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithListUnsubscribe);
+  t.deepEqual(response, successResponse);
+});

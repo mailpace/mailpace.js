@@ -8,6 +8,7 @@ export type Message = {
   cc?: string;
   bcc?: string;
   replyto?: string;
+  list_unsubscribe?: string;
   attachments?: ReadonlyArray<Attachment>;
   tags?: string | ReadonlyArray<string>;
 };
