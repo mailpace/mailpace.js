@@ -45,7 +45,7 @@ client
 
 ## Documentation
 
-See [the ./docs folder](https://github.com/ohmysmtp/ohmysmtp.js/docs) for documentation and options
+See [the ./docs folder](https://github.com/ohmysmtp/ohmysmtp.js/tree/master/docs) for documentation and options
 
 To regenerate the documentation, run `yarn docs:md`
 
