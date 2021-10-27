@@ -33,6 +33,7 @@
     "doc": "run-s doc:html && open-cli build/docs/index.html",
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
+    "doc:md": "typedoc --out docs src/index.ts",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
@@ -42,14 +43,13 @@
     "node": ">=10"
   },
   "dependencies": {
+    "@types/node": "^14.14.16",
     "axios": "^0.21.1",
-    "typescript": "^4.0.2",
-    "ts-node": "^9.0.0",
-    "@types/node": "^14.14.16"
+    "ts-node": "^9.0.0"
   },
   "devDependencies": {
-    "@bitauth/libauth": "^1.17.1",
     "@ava/typescript": "^1.1.1",
+    "@bitauth/libauth": "^1.17.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
@@ -69,7 +69,9 @@
     "open-cli": "^6.0.1",
     "prettier": "^2.1.1",
     "standard-version": "^9.0.0",
-    "typedoc": "^0.19.0"
+    "typedoc": "0.21.0",
+    "typedoc-plugin-markdown": "3.10.0",
+    "typescript": "^4.2.0"
   },
   "files": [
     "build/main",
