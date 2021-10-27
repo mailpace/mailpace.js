@@ -45,7 +45,9 @@ client
 
 ## Documentation
 
-See https://docs.ohmysmtp.com/integrations/node for detailed documentation and all options
+See `[the /docs folder](https://github.com/ohmysmtp/ohmysmtp.js/docs)`for documentation and options
+
+To regenerate the documentation, run `yarn docs:md`
 
 ## Issues, Support & Contributions
 
