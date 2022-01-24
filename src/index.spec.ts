@@ -14,8 +14,8 @@ const exampleEmail = {
   htmlbody: '<h1>Hi</h1>',
 };
 
-import * as ohmysmtp from './index';
-const client = new ohmysmtp.DomainClient('token');
+import * as mailpace from './index';
+const client = new mailpace.DomainClient('token');
 
 test.afterEach.always(() => {
   mock.reset();

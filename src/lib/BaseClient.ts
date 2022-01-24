@@ -4,7 +4,7 @@ import { ErrorHandler } from './ErrorHandler';
 import { Options } from './models/Options';
 import { Callback } from './types/Callback';
 
-const CLIENT_VERSION = '0.0.10'; // TODO: use library version in package.json
+const CLIENT_VERSION = '0.0.13'; // TODO: use library version in package.json
 const API_VERSION = 'v1'; // TODO: make this a client option
 
 /**
@@ -15,7 +15,7 @@ export default abstract class BaseClient {
    * Default options
    */
   public static readonly DefaultOptions: Options.Configuration = {
-    requestHost: `app.ohmysmtp.com/api/${API_VERSION}/`,
+    requestHost: `app.mailpace.com/api/${API_VERSION}/`,
     timeout: 60,
   };
 
@@ -51,7 +51,7 @@ export default abstract class BaseClient {
       [this.authHeader]: this.token,
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'User-Agent': `ohmysmtp.js - ${this.clientVersion}`,
+      'User-Agent': `mailpace.js - ${this.clientVersion}`,
     };
   }
 

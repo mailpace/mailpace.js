@@ -9,6 +9,6 @@ export namespace Options {
   }
 
   export enum DefaultHeaderNames {
-    SERVER_TOKEN = 'OhMySMTP-Server-Token',
+    SERVER_TOKEN = 'MailPace-Server-Token',
   }
 }

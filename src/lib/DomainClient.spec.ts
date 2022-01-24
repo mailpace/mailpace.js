@@ -5,7 +5,7 @@ import DomainClient from './DomainClient';
 const token = 'token';
 const client = new DomainClient(token);
 const defaultClientOptions = {
-  requestHost: 'app.ohmysmtp.com/api/v1/',
+  requestHost: 'app.mailpace.com/api/v1/',
   timeout: 60,
 };
 const otherClientOptions = { requestHost: 'another.com', timeout: 600 };
@@ -13,8 +13,8 @@ const otherClientOptions = { requestHost: 'another.com', timeout: 600 };
 const defaultRequestHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  'OhMySMTP-Server-Token': token,
-  'User-Agent': 'ohmysmtp.js - 0.0.10',
+  'MailPace-Server-Token': token,
+  'User-Agent': 'mailpace.js - 0.0.13',
 };
 
 test('can initialize the domain client with default values', (t) => {

@@ -5,7 +5,7 @@ import { Callback } from './types/Callback';
 import { SendResponse } from './types/Responses';
 
 /**
- * Client class that can be used to interact with an OhMySMTP Domain
+ * Client class that can be used to interact with an MailPace Domain
  */
 export default class DomainClient extends BaseClient {
   /**

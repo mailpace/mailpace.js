@@ -1,8 +1,8 @@
-[@ohmysmtp/ohmysmtp.js](../README.md) / [Exports](../modules.md) / DomainClient
+[@mailpace/mailpace.js](../README.md) / [Exports](../modules.md) / DomainClient
 
 # Class: DomainClient
 
-Client class that can be used to interact with an OhMySMTP Domain
+Client class that can be used to interact with an MailPace Domain
 
 ## Hierarchy
 
@@ -51,7 +51,7 @@ BaseClient.constructor
 
 #### Defined in
 
-[lib/DomainClient.ts:10](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/DomainClient.ts#L10)
+[lib/DomainClient.ts:10](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/DomainClient.ts#L10)
 
 ## Properties
 
@@ -65,7 +65,7 @@ BaseClient.clientVersion
 
 #### Defined in
 
-[lib/BaseClient.ts:22](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L22)
+[lib/BaseClient.ts:22](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L22)
 
 ___
 
@@ -79,7 +79,7 @@ BaseClient.errorHandler
 
 #### Defined in
 
-[lib/BaseClient.ts:24](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L24)
+[lib/BaseClient.ts:24](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L24)
 
 ___
 
@@ -93,7 +93,7 @@ BaseClient.httpClient
 
 #### Defined in
 
-[lib/BaseClient.ts:23](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L23)
+[lib/BaseClient.ts:23](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L23)
 
 ___
 
@@ -109,7 +109,7 @@ BaseClient.DefaultOptions
 
 #### Defined in
 
-[lib/BaseClient.ts:17](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L17)
+[lib/BaseClient.ts:17](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L17)
 
 ## Methods
 
@@ -127,7 +127,7 @@ BaseClient.getOptions
 
 #### Defined in
 
-[lib/BaseClient.ts:42](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L42)
+[lib/BaseClient.ts:42](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L42)
 
 ___
 
@@ -147,7 +147,7 @@ BaseClient.prepareHeaders
 
 #### Defined in
 
-[lib/BaseClient.ts:49](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L49)
+[lib/BaseClient.ts:49](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L49)
 
 ___
 
@@ -184,7 +184,7 @@ BaseClient.processRequestWithBody
 
 #### Defined in
 
-[lib/BaseClient.ts:63](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/BaseClient.ts#L63)
+[lib/BaseClient.ts:63](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/BaseClient.ts#L63)
 
 ___
 
@@ -209,4 +209,4 @@ A promise that will resolve when the API responds (or an error occurs)
 
 #### Defined in
 
-[lib/DomainClient.ts:27](https://github.com/ohmysmtp/ohmysmtp.js/blob/0ed46d8/src/lib/DomainClient.ts#L27)
+[lib/DomainClient.ts:27](https://github.com/mailpace/mailpace.js/blob/0ed46d8/src/lib/DomainClient.ts#L27)

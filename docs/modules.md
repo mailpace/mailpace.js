@@ -1,6 +1,6 @@
-[@ohmysmtp/ohmysmtp.js](README.md) / Exports
+[@mailpace/mailpace.js](README.md) / Exports
 
-# @ohmysmtp/ohmysmtp.js
+# @mailpace/mailpace.js
 
 ## Table of contents
 
