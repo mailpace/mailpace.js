@@ -144,3 +144,27 @@ test.serial('can handle list-unsubscribe headers', async (t) => {
   const response = await client.sendEmail(emailWithListUnsubscribe);
   t.deepEqual(response, successResponse);
 });
+
+test.serial('can handle in-reply-to', async (t) => {
+  const emailWithInReplyTo = Object.assign(
+    {
+      inreplyto: '<message-id@test.com>',
+    },
+    exampleEmail
+  );
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithInReplyTo);
+  t.deepEqual(response, successResponse);
+});
+
+test.serial('can handle references', async (t) => {
+  const emailWithReferences = Object.assign(
+    {
+      references: '<message-id@test.com>, <abc@test.com>',
+    },
+    exampleEmail
+  );
+  mock.onPost('/send').reply(200, successResponse);
+  const response = await client.sendEmail(emailWithReferences);
+  t.deepEqual(response, successResponse);
+});

@@ -25,6 +25,7 @@
     "ohmysmtp",
     "mailpace",
     "replyto",
+    "inreplyto",
     "htmlbody",
     "textbody",
     "readonly"
