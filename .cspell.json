@@ -6,7 +6,6 @@
     "bitjson",
     "bitauth",
     "cimg",
-    "circleci",
     "codecov",
     "commitlint",
     "dependabot",
