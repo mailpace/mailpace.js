@@ -1,4 +1,4 @@
-import { Attachment } from './Attachment';
+import type { Attachment } from './Attachment';
 export type Message = {
   from: string;
   to: string;

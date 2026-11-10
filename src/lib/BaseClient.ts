@@ -3,8 +3,8 @@ import axios, { AxiosError, AxiosInstance } from 'axios';
 import { ErrorHandler } from './ErrorHandler';
 import { Options } from './models/Options';
 import { Callback } from './types/Callback';
+import { CLIENT_VERSION } from './version';
 
-const CLIENT_VERSION = '0.0.13'; // TODO: use library version in package.json
 const API_VERSION = 'v1'; // TODO: make this a client option
 
 /**
@@ -29,7 +29,7 @@ export default abstract class BaseClient {
   protected constructor(
     token: string,
     authHeader: string,
-    configOptions?: Options.Configuration
+    configOptions?: Options.Configuration,
   ) {
     this.clientVersion = CLIENT_VERSION;
     this.token = token.trim();
@@ -64,7 +64,7 @@ export default abstract class BaseClient {
     method: Options.HttpMethod,
     path: string,
     body: null | object,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): Promise<T> {
     return this.processRequest(method, path, {}, body, callback);
   }
@@ -85,13 +85,13 @@ export default abstract class BaseClient {
     path: string,
     queryParameters: object,
     body: null | object,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): Promise<T> {
     const httpRequest: Promise<T> = this.processHttpRequest(
       method,
       path,
       queryParameters,
-      body
+      body,
     );
     this.processCallbackRequest(httpRequest, callback);
     return httpRequest;
@@ -111,7 +111,7 @@ export default abstract class BaseClient {
     method: Options.HttpMethod,
     path: string,
     queryParameters: object,
-    body: null | object
+    body: null | object,
   ): Promise<T> {
     return this.httpRequest<T>(method, path, queryParameters, body)
       .then((response) => response)
@@ -128,7 +128,7 @@ export default abstract class BaseClient {
    */
   private processCallbackRequest<T>(
     httpRequest: Promise<T>,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): void {
     if (callback) {
       httpRequest
@@ -148,16 +148,18 @@ export default abstract class BaseClient {
   private httpRequest<T>(
     method: Options.HttpMethod,
     path: string,
-    queryParameters: {} | object,
-    body: null | object
+    queryParameters: object,
+    body: null | object,
   ): Promise<T> {
-    return this.httpClient.request<void, T>({
+    // The response interceptor in buildHttpClient unwraps the Axios response,
+    // so the runtime value is the response body rather than an AxiosResponse.
+    return this.httpClient.request<T, T>({
       method,
       url: path,
       data: body,
       headers: this.prepareHeaders(),
       params: queryParameters,
-    });
+    }) as unknown as Promise<T>;
   }
 
   /**
@@ -172,9 +174,6 @@ export default abstract class BaseClient {
       responseType: 'json',
       maxContentLength: Infinity,
       maxBodyLength: 30 * 1024 * 1024,
-      validateStatus(status) {
-        return status >= 200 && status < 300;
-      },
     });
 
     httpClient.interceptors.response.use((response) => response.data);

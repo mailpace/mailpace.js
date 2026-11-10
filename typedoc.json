@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "intentionallyNotExported": ["ErrorHandler"],
+  "hideGenerator": true,
+  "gitRevision": "master",
+  "readme": "none"
+}

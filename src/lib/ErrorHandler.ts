@@ -1,7 +1,7 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
 
 import * as Errors from './models/Errors';
-import { ErrorResponse } from './types/Responses';
+import type { ErrorResponse } from './types/Responses';
 
 /**
  * Handles three different error types:
@@ -35,13 +35,13 @@ export class ErrorHandler {
    */
   private buildAxiosError(
     response: AxiosResponse,
-    errorMessage: string
+    errorMessage: string,
   ): Errors.OmsError {
     const data: ErrorResponse = response.data || {};
     const status = this.retrieveDefaultOrValue<number>(0, response.status);
     const message = this.retrieveDefaultOrValue<string>(
       errorMessage,
-      data.error || JSON.stringify(data.errors)
+      data.error || JSON.stringify(data.errors),
     );
 
     return this.mapErrorToStatus(message, status);
@@ -60,7 +60,7 @@ export class ErrorHandler {
    */
   private mapErrorToStatus(
     errorMessage: string,
-    errorStatusCode: number
+    errorStatusCode: number,
   ): Errors.HttpError {
     switch (errorStatusCode) {
       case 400:
@@ -81,7 +81,7 @@ export class ErrorHandler {
       case 503:
         return new Errors.ServiceUnavailableError(
           errorMessage,
-          errorStatusCode
+          errorStatusCode,
         );
 
       default:

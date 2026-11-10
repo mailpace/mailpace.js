@@ -28,7 +28,10 @@
     "inreplyto",
     "htmlbody",
     "textbody",
-    "readonly"
+    "readonly",
+    "vitest",
+    "lcov",
+    "npmrc"
   ],
   "flagWords": [],
   "ignorePaths": [

@@ -1,2 +1,5 @@
-# package.json is formatted by package managers, so we ignore it here
-package.json
+# Build output and reports are generated
+build
+coverage
+docs
+package-lock.json

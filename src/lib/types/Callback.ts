@@ -1,4 +1,4 @@
-import { OmsError } from '../models/Errors';
+import type { OmsError } from '../models/Errors';
 
 /**
  * Node callback, with errors raised under 'OmsError'

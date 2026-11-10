@@ -1,8 +1,8 @@
 import BaseClient from './BaseClient';
-import { Message } from './models/Message';
+import type { Message } from './models/Message';
 import { Options } from './models/Options';
-import { Callback } from './types/Callback';
-import { SendResponse } from './types/Responses';
+import type { Callback } from './types/Callback';
+import type { SendResponse } from './types/Responses';
 
 /**
  * Client class that can be used to interact with an MailPace Domain
@@ -20,19 +20,19 @@ export default class DomainClient extends BaseClient {
 
   /** Send a single email message through the API
    *
-   * @param send - Email to send
+   * @param email - Email to send
    * @param callback - A callback that if provided will be called after sending the email is complete
    * @returns A promise that will resolve when the API responds (or an error occurs)
    */
   public sendEmail(
     email: Message,
-    callback?: Callback<SendResponse>
+    callback?: Callback<SendResponse>,
   ): Promise<SendResponse> {
     return this.processRequestWithBody<SendResponse>(
       Options.HttpMethod.POST,
       '/send',
       email,
-      callback
+      callback,
     );
   }
 }

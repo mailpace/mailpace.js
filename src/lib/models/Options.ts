@@ -1,7 +1,7 @@
 export namespace Options {
-  export class Configuration {
-    public readonly requestHost: string;
-    public readonly timeout: number;
+  export interface Configuration {
+    readonly requestHost: string;
+    readonly timeout: number;
   }
 
   export enum HttpMethod {

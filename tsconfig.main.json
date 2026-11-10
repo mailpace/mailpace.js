@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "build/main",
+    "noEmit": false
+  },
+  "exclude": ["node_modules", "build", "coverage", "src/**/*.spec.ts"]
+}
